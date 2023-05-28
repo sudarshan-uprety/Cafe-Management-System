@@ -16,3 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
         user=User.objects.create(**validated_data)
         return User
 
+class LoginSerializer(serializers.ModelSerializer):
+    email=serializers.EmailField()
+
+    class Meta:
+        model=User
+        fields=['email','password']

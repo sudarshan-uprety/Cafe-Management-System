@@ -7,16 +7,19 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer,LoginSerializer
 from users import serializers
 from users.models import User
+from django.contrib.auth import authenticate,logout
 # Create your views here.
 
-class MyTokenObtainPairView(TokenObtainPairView):
-    permission_classes = (AllowAny,)
-    # serializer_class = MyTokenObtainPairSerializer
+def get_token_for_user(user):
+    refresh=RefreshToken.for_user(user)
+    return {
+        'access':str(refresh.access_token),
+        'refresh':str(refresh),
 
+    }
 
 class CreateUser(generics.GenericAPIView):
     """
@@ -47,6 +50,26 @@ class CreateUser(generics.GenericAPIView):
         return Response({"message":"User register successfully."})
 
 
+class LoginView(generics.GenericAPIView):
+    """
+    An endpoints to login
+    """
+    serializer_class=LoginSerializer
+    permission_classes=(AllowAny,)
 
-# class Login(generics.GenericAPIView):
+    def get(self,request):
+        return User.objects.none()
 
+
+    def post(self,request):
+        serializer=LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email=serializer.validated_data['email']
+        password=serializer.validated_data['password']
+        user=authenticate(request,email=email,password=password)
+        print(user)
+        if user is not None:
+            user = User.objects.get(email=email)
+            token = get_token_for_user(user)
+            return Response({"success": "You are logged in", "token": token})
+        return Response({"error": "Invalid Credentials"}, status=401)
