@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'foods',
     'category',
     'drinks',
+    'offers',
+    'hukka',
+    'beakery',
 ]
 
 MIDDLEWARE = [

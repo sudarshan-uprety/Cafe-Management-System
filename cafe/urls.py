@@ -28,6 +28,11 @@ urlpatterns = [
     path('foods/',include('foods.urls')),
     path('drinks/',include('drinks.urls')),
     path('category/',include('category.urls')),
+    path('offers/',include('offers.urls')),
+    path('hukkas/',include('hukka.urls')),
+    path('beakery/',include('beakery.urls')),
+
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
