@@ -44,12 +44,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('user/',include('users.urls')),
-    path('foods/',include('foods.urls')),
-    path('drinks/',include('drinks.urls')),
-    path('category/',include('category.urls')),
+    # path('foods/',include('foods.urls')),
+    # path('drinks/',include('drinks.urls')),
+    # path('category/',include('category.urls')),
     path('offers/',include('offers.urls')),
-    path('hukkas/',include('hukka.urls')),
-    path('beakery/',include('beakery.urls')),
+    # path('hukkas/',include('hukka.urls')),
+    # path('beakery/',include('beakery.urls')),
 
 
 

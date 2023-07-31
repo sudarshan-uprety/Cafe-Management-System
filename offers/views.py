@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from offers.models import FoodOffers,DrinkOffers,HukkaOffers,BeakeryOffers
-from foods.models import Food
-from drinks.models import Drink
+from menu.models import Food, Drink
 from rest_framework import generics,status
 from rest_framework.response import Response
 from offers.serializers import FoodOfferSerializer,DrinkOfferSerializer,OfferSerializer,HukkaOfferSerializer,BeakeryOfferSerializer

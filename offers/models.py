@@ -1,8 +1,5 @@
 from django.db import models
-from foods.models import Food
-from drinks.models import Drink
-from hukka.models import Hukka
-from beakery.models import Beakery
+from menu.models import Food, Hukka, Beakery, Drink
 
 # Create your models here.
 
