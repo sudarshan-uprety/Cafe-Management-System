@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render
-from offers.models import FoodOffers,DrinkOffers,HukkaOffers,BeakeryOffers
+from offers.models import FoodOffers,DrinkOffers,HukkaOffers,BakeryOffers
 from menu.models import Food, Drink
 from rest_framework import generics,status
 from rest_framework.response import Response
@@ -46,7 +46,7 @@ class BeakeryOffersView(generics.GenericAPIView):
     serializer_class=BeakeryOfferSerializer
 
     def get_queryset(self):
-        return BeakeryOffers.objects.all()
+        return BakeryOffers.objects.all()
     
     def get(self,request):
         queryset=self.get_queryset()

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from offers.models import FoodOffers,DrinkOffers,HukkaOffers,BeakeryOffers
+from offers.models import FoodOffers,DrinkOffers,HukkaOffers, BakeryOffers
 from django.core.exceptions import ValidationError
 from rest_framework.response import Response
 
@@ -37,7 +37,7 @@ class HukkaOfferSerializer(serializers.ModelSerializer):
 class BeakeryOfferSerializer(serializers.ModelSerializer):
     name=serializers.SerializerMethodField()
     class Meta:
-        model=BeakeryOffers
+        model=BakeryOffers
         fields='__all__'
 
     def get_name(self,obj):

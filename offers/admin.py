@@ -1,5 +1,5 @@
 from django.contrib import admin
-from offers.models import DrinkOffers,FoodOffers,HukkaOffers,BeakeryOffers
+from offers.models import DrinkOffers,FoodOffers,HukkaOffers, BakeryOffers
 # Register your models here.
 
 class FoodOffersAdmin(admin.ModelAdmin):
@@ -17,5 +17,5 @@ class BeakeryOfferAdmin(admin.ModelAdmin):
 admin.site.register(FoodOffers,FoodOffersAdmin)
 admin.site.register(DrinkOffers,DrinkOfferAdmin)
 admin.site.register(HukkaOffers,HukkaOfferAdmin)
-admin.site.register(BeakeryOffers,BeakeryOfferAdmin)
+admin.site.register(BakeryOffers,BeakeryOfferAdmin)
 
