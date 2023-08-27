@@ -8,17 +8,17 @@ class AccountAdmin(UserAdmin):  # This class is used to make sure that the hashe
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal Info', {'fields': ('full_name', 'phone')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'full_name', 'phone', 'password1', 'password2'),
+            'fields': ('email', 'full_name', 'phone', 'password1', 'password2', 'groups'),
         }),
     )
     search_fields = ('email', 'full_name', 'phone')
     ordering = ('email',)
-    filter_horizontal = ()
+    filter_horizontal = ('groups',)
 
 
 admin.site.register(User, AccountAdmin)

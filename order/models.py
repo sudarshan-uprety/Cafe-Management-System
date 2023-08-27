@@ -30,6 +30,9 @@ class FoodQuantity(models.Model):
     name = models.ForeignKey(Food, on_delete=models.CASCADE)
     order = models.ForeignKey("Order", on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+        return self.name.name
+
 class DrinksQuantity(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     name = models.ForeignKey(Drink, on_delete=models.CASCADE)

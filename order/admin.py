@@ -1,6 +1,7 @@
 from django.contrib import admin
 from order.models import Table, Order
 from order.models import FoodQuantity, DrinksQuantity, HukkaQuantity, BakeryQuantity
+from django.core.serializers import serialize
 # Register your models here.
 class TableAdmin(admin.ModelAdmin):
     list_display = ['table_name']
@@ -29,12 +30,17 @@ class BakeryOrder(admin.TabularInline):
     verbose_name = "Bakery Orders"
     verbose_name_plural = "Bakery Orders"
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['table_number', 'order_by', 'order_time']
+    list_display = ['table_number', 'ordered_items', 'order_by', 'order_time']
 
-    # def ordered_items(self, obj):
-    #     return ", ".join([item.name for item in obj.items.all()])
+    def ordered_items(self, obj):
+        food = FoodQuantity.objects.all().values_list('name', flat=True)
+        drinks = DrinksQuantity.objects.all().values_list('name', flat=True)
+        bakery = BakeryQuantity.objects.all().values_list('name', flat=True)
+        hukka = HukkaQuantity.objects.all().values_list('name', flat=True)
 
-    # exclude = ['order_by']
+        return (str(food)+str(drinks)+str(bakery)+str(hukka))
+
+    exclude = ['order_by']
     inlines = [FoodOrders, DrinkOrders, HukkaOrders, BakeryOrder]
     def save_model(self, request, obj, form, change):
         if not change:  # Only set the order_by field if the object is being created (not changed).
