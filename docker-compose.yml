@@ -1,0 +1,7 @@
+version: '3'
+services:
+  cafe-management:
+    build:
+      context: .
+    ports:
+      - 8000:80

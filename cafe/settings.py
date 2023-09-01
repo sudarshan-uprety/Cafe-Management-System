@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'offers',
     'order',
     'menu',
+    'futsal',
 ]
 
 MIDDLEWARE = [
@@ -304,3 +305,5 @@ JAZZMIN_SETTINGS = {
     # Add a language dropdown into the admin
     "language_chooser": False,
 }
+
+TIME_INPUT_FORMATS = ['%I:%M %p']
