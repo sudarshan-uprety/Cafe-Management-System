@@ -2,6 +2,8 @@ from django.contrib import admin
 from order.models import Table, Order
 from order.models import FoodQuantity, DrinksQuantity, HukkaQuantity, BakeryQuantity
 from django.core.serializers import serialize
+from django.db.models import FloatField
+from django.db.models.functions import Cast
 # Register your models here.
 class TableAdmin(admin.ModelAdmin):
     list_display = ['table_name']
@@ -42,9 +44,14 @@ class OrderAdmin(admin.ModelAdmin):
     exclude = ['order_by']
     inlines = [FoodOrders, DrinkOrders, HukkaOrders, BakeryOrder]
     def save_model(self, request, obj, form, change):
-        if not change:  # Only set the order_by field if the object is being created (not changed).
-            obj.order_by = request.user
+        obj.order_by = request.user
         super().save_model(request, obj, form, change)
+        # food_price = obj.food.all().annotate(float_price=Cast('price', FloatField())).values_list('float_price', flat=True)
+        # drinks_price = obj.drink.all().annotate(float_price=Cast('price', FloatField())).values_list('float_price', flat=True)
+        # bakery_price = obj.bakery.all().annotate(float_price=Cast('price', FloatField())).values_list('float_price', flat=True)
+        # hukka_price = obj.hukka.all().annotate(float_price=Cast('price', FloatField())).values_list('float_price', flat=True)
+        # obj.total_amount = sum(list(food_price))+sum(list(drinks_price))+sum(list(hukka_price))+sum(list(bakery_price))
+        # obj.save()
 
 admin.site.register(Table, TableAdmin)
 admin.site.register(Order, OrderAdmin)

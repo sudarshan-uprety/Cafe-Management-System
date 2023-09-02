@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'order',
     'menu',
     'futsal',
+    'payment',
 ]
 
 MIDDLEWARE = [

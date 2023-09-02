@@ -19,6 +19,7 @@ class Order(models.Model):
     hukka = models.ManyToManyField(Hukka, blank=True, through="HukkaQuantity")
     bakery = models.ManyToManyField(Beakery, blank=True, through="BakeryQuantity")
     order_time = models.DateTimeField(auto_now_add=True)
+    total_amount = models.FloatField(blank=True, null=True)
 
 
     def __str__(self):
