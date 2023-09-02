@@ -33,12 +33,11 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['table_number', 'ordered_items', 'order_by', 'order_time']
 
     def ordered_items(self, obj):
-        food = FoodQuantity.objects.all().values_list('name', flat=True)
-        drinks = DrinksQuantity.objects.all().values_list('name', flat=True)
-        bakery = BakeryQuantity.objects.all().values_list('name', flat=True)
-        hukka = HukkaQuantity.objects.all().values_list('name', flat=True)
-
-        return (str(food)+str(drinks)+str(bakery)+str(hukka))
+        food = obj.food.all().values_list('name')
+        drinks = obj.drink.all().values_list('name')
+        bakery = obj.bakery.all().values_list('name')
+        hukka = obj.hukka.all().values_list('name')
+        return list(food)+list(drinks)+list(bakery)+list(hukka)
 
     exclude = ['order_by']
     inlines = [FoodOrders, DrinkOrders, HukkaOrders, BakeryOrder]
